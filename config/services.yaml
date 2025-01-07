@@ -1,0 +1,23 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Kernel.php'
+
+    App\Client\MortgageClient:
+        arguments:
+            $baseUrl: '%env(MORTGAGE_API_ENDPOINT)%'
+
+    App\Command\CalculateMaximumMortgageByValueCommand:
+        arguments:
+            $maximumByHouseValueEndpoint: '%env(MORTGAGE_API_MAXIMUM_BY_HOUSE_VALUE_ENDPOINT)%'
+
+    App\Command\CalculateMaximumMortgageByIncomeCommand:
+        arguments:
+            $maximumByIncomeEndpoint: '%env(MORTGAGE_API_MAXIMUM_BY_INCOME_ENDPOINT)%'
